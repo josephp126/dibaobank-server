@@ -1,0 +1,40 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e582758f.chunk.css",
+    "main.js": "/static/js/main.6bda1210.chunk.js",
+    "main.js.map": "/static/js/main.6bda1210.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.38ba159f.js",
+    "runtime-main.js.map": "/static/js/runtime-main.38ba159f.js.map",
+    "static/js/2.b86606d6.chunk.js": "/static/js/2.b86606d6.chunk.js",
+    "static/js/2.b86606d6.chunk.js.map": "/static/js/2.b86606d6.chunk.js.map",
+    "static/js/3.742725ab.chunk.js": "/static/js/3.742725ab.chunk.js",
+    "static/js/3.742725ab.chunk.js.map": "/static/js/3.742725ab.chunk.js.map",
+    "static/js/4.4b2d6930.chunk.js": "/static/js/4.4b2d6930.chunk.js",
+    "static/js/4.4b2d6930.chunk.js.map": "/static/js/4.4b2d6930.chunk.js.map",
+    "static/js/5.81126c3f.chunk.js": "/static/js/5.81126c3f.chunk.js",
+    "static/js/5.81126c3f.chunk.js.map": "/static/js/5.81126c3f.chunk.js.map",
+    "static/js/6.349b777f.chunk.js": "/static/js/6.349b777f.chunk.js",
+    "static/js/6.349b777f.chunk.js.map": "/static/js/6.349b777f.chunk.js.map",
+    "static/js/7.bdcf29e4.chunk.js": "/static/js/7.bdcf29e4.chunk.js",
+    "static/js/7.bdcf29e4.chunk.js.map": "/static/js/7.bdcf29e4.chunk.js.map",
+    "static/js/8.578a4fc8.chunk.js": "/static/js/8.578a4fc8.chunk.js",
+    "static/js/8.578a4fc8.chunk.js.map": "/static/js/8.578a4fc8.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.e582758f.chunk.css.map": "/static/css/main.e582758f.chunk.css.map",
+    "static/js/2.b86606d6.chunk.js.LICENSE.txt": "/static/js/2.b86606d6.chunk.js.LICENSE.txt",
+    "static/media/Pixy_Logo.ba8e332e.png": "/static/media/Pixy_Logo.ba8e332e.png",
+    "static/media/back.56e5633c.png": "/static/media/back.56e5633c.png",
+    "static/media/body-back.30cf97f7.png": "/static/media/body-back.30cf97f7.png",
+    "static/media/sample_NFT_1.43729712.png": "/static/media/sample_NFT_1.43729712.png",
+    "static/media/sample_NFT_2.b7530d91.png": "/static/media/sample_NFT_2.b7530d91.png",
+    "static/media/sample_NFT_3.4ae8bc81.png": "/static/media/sample_NFT_3.4ae8bc81.png",
+    "static/media/App.css": "/static/media/sanfranciscodisplay-ultralight-webfont.35e87e7a.woff",
+    "static/media/video-1.6b30967e.png": "/static/media/video-1.6b30967e.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.38ba159f.js",
+    "static/js/2.b86606d6.chunk.js",
+    "static/css/main.e582758f.chunk.css",
+    "static/js/main.6bda1210.chunk.js"
+  ]
+}
