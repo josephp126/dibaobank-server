@@ -1,2 +1,0 @@
-(this["webpackJsonppixy-web-app"]=this["webpackJsonppixy-web-app"]||[]).push([[6],{704:function(p,t,e){"use strict";e.r(t);e(0);var i=e(1);t.default=function(){return Object(i.jsx)("div",{})}}}]);
-//# sourceMappingURL=6.349b777f.chunk.js.map

@@ -1,1 +1,0 @@
-{"version":3,"sources":["pages/Catalog.tsx"],"names":["Catalog"],"mappings":"oHAAA,uBAMeA,UAJC,WACd,OAAO","file":"static/js/7.bdcf29e4.chunk.js","sourcesContent":["import React from \"react\";\r\n\r\nconst Catalog = () => {\r\n  return <div></div>;\r\n};\r\n\r\nexport default Catalog;\r\n"],"sourceRoot":""}

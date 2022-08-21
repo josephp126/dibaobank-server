@@ -1,6 +1,5 @@
-const { createPool } = require("mysql");
-
-const pool = createPool({
+let mysql = require("mysql");
+let pool = mysql.createPool({
   host: "localhost",
   user: "root",
   password: "",
@@ -8,16 +7,9 @@ const pool = createPool({
   connectionLimit: 10,
 });
 
-pool.connect((err) => {
-  if (err) {
-    console.log("Error connecting to Db");
-    return;
-  }
-  console.log("Connection established");
+pool.getConnection(function(err, connection) {
+  if(err) throw err;
+  console.log("connection success");
 });
-
-var sql = "insert into table values(?,?,?)";
-var args = [1, "dfd", 2];
-pool.query(sql, args);
 
 module.exports = pool;
