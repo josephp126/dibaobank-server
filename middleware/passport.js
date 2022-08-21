@@ -1,24 +1,21 @@
-const passport = require("passport");
-const passportJWT = require("passport-jwt");
-const JWTStrategy = passportJWT.Strategy;
-const ExtractJWT = passportJWT.ExtractJwt;
-const con = require("../db/conn");
+const jwt = require("jsonwebtoken");
 
-passport.use(
-    new JWTStrategy(
-        {
-            jwtFromRequest: passportJWT.ExtractJwt.fromAuthHeaderAsBearerToken(),
-            secretOrKey: "joanlouji",
-        },
-        function(jwtPayload, done) {
-            let sql = `select * from users where id = ${jwtPayload.sub}`;
-            con.query(sql, function(err, result) {
-                if(err) return done(err);
-                if(result[0]){
-                    let user = JSON.parse(JSON.stringify(result[0]));
-                    return done(null, user);
-                }
-            });
-        }
-    )
-);
+const config = process.env;
+
+const verifyToken = (req, res, next) => {
+  const token =
+    req.body.token || req.query.token || req.headers["x-access-token"];
+
+  if (!token) {
+    return res.status(403).send("A token is required for authentication");
+  }
+  try {
+    const decoded = jwt.verify(token, "joanlouji");
+    req.user = decoded;
+  } catch (err) {
+    return res.send("Invalid Token");
+  }
+  return next();
+};
+
+module.exports = verifyToken;
