@@ -1,8 +1,8 @@
 const con = require("../db/conn");
 
-const getDatas = async (callback) => {
-  let sql = "select * from account_info";
-  let args = [];
+const getDatas = async (data, callback) => {
+  let sql = "select * from account_info where userId=?";
+  let args = [Number(data.userId)];
   con.query(sql, args, function (err, result) {
     if (err) {
       console.log("get accountInfo error" + err);
@@ -14,10 +14,17 @@ const getDatas = async (callback) => {
 };
 
 const createData = async (data, callback) => {
-  let sql = `insert into account_info(type, nickName, account, accountName, created_at)
-  values(?, ?, ?, ?, ?)`;
+  let sql = `insert into account_info(userId, type, nickName, account, accountName, created_at)
+  values(?, ?, ?, ?, ?, ?)`;
   let nowday = dateFormat(new Date(), "%Y-%m-%d %H:%M:%S", true);
-  let args = [data.type, data.nickName, data.account, data.accountName, nowday];
+  let args = [
+    data.userId,
+    data.type,
+    data.nickName,
+    data.account,
+    data.accountName,
+    nowday,
+  ];
   con.query(sql, args, function (err, result) {
     if (err) {
       console.log("create accountInfo error" + err);
