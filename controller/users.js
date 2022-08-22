@@ -43,7 +43,6 @@ const login = (datas, callback) => {
     if (err) {
       res.json({ err: err });
     } else {
-      console.log(result);
       if (result.length > 0) {
         let user = JSON.parse(JSON.stringify(result[0]));
         // bcrypt.compare(datas.password, user.password, (err, comRes) => {
