@@ -4,6 +4,7 @@ const bankInfoController = require("../controller/bankInfo");
 
 router.post("/create", async (req, res) => {
   let datas = req.body.data;
+  console.log(datas);
   bankInfoController.saveData(datas, function (err, result) {
     if (err) {
       res.send(err);
