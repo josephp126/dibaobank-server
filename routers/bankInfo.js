@@ -13,4 +13,26 @@ router.post("/create", async (req, res) => {
   });
 });
 
+router.get("/datas", async (req, res) => {
+  let datas = req.body;
+  bankInfoController.geDatas(datas, function (err, result) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+router.delete("/delete/:id", async (req, res) => {
+  let datas = req.params;
+  bankInfoController.deleteDatas(datas, function (err, result) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(result);
+    }
+  });
+});
+
 module.exports = router;
