@@ -3,7 +3,7 @@ const router = express.Router();
 const bankInfoController = require("../controller/bankInfo");
 
 router.post("/create", async (req, res) => {
-  let datas = req.body.data;
+  let datas = req.body;
   console.log(datas);
   bankInfoController.saveData(datas, function (err, result) {
     if (err) {

@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const routers = require("./routers/routers");
 const fileUpload = require("express-fileupload");
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 80;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
