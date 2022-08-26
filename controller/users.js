@@ -22,10 +22,17 @@ const genToken = (user) => {
 const register = async (datas, callback) => {
   const salt = await bcrypt.genSalt(10);
   datas.password = await bcrypt.hash(datas.password, salt);
+  datas.withdrawl_password = await bcrypt.hash(datas.withdrawl_password, salt);
   let sql =
-    "insert into users(name, email, password, phone)\
-              Value(?,?,?,?)";
-  let args = [datas.name, datas.email, datas.password, datas.telNum];
+    "insert into users(name, email, address, password, withdrawl_password)\
+              Value(?, ?, ?, ?, ?)";
+  let args = [
+    datas.name,
+    datas.email,
+    datas.address,
+    datas.password,
+    datas.withdrawl_password,
+  ];
   con.query(sql, args, function (err, result) {
     if (err) {
       console.log("register error" + err);
@@ -45,18 +52,89 @@ const login = (datas, callback) => {
     } else {
       if (result.length > 0) {
         let user = JSON.parse(JSON.stringify(result[0]));
-        // bcrypt.compare(datas.password, user.password, (err, comRes) => {
-        //   if (comRes) {
-        const newUser = {
-          id: user.id,
-          name: user.name,
-        };
-        user.token = genToken(newUser);
-        callback(null, user);
-        //   } else {
-        //     callback("invalid user", null);
-        //   }
-        // });
+        bcrypt.compare(datas.password, user.password, (err, comRes) => {
+          if (comRes) {
+            const newUser = {
+              id: user.id,
+              name: user.name,
+            };
+            user.token = genToken(newUser);
+            callback(null, user);
+          } else {
+            callback("invalid user", null);
+          }
+        });
+      } else {
+        callback("invalid user", null);
+      }
+    }
+  });
+};
+
+const changeLoginPassword = async (datas, callback) => {
+  const salt = await bcrypt.genSalt(10);
+  datas.newPassword = await bcrypt.hash(datas.newPassword, salt);
+  let sql = "select * from users where id = ?";
+  var args = [datas.id];
+  con.query(sql, args, function (err, result) {
+    if (err) {
+      res.json({ err: err });
+    } else {
+      if (result.length > 0) {
+        console.log("aaa");
+        let user = JSON.parse(JSON.stringify(result[0]));
+        bcrypt.compare(datas.oldPassword, user.password, (err, comRes) => {
+          if (comRes) {
+            let sql = "update users set password=? where id=?";
+            let args = [datas.newPassword, datas.id];
+            con.query(sql, args, function (err, result) {
+              if (err) {
+                callback("update loginpass error", null);
+              } else {
+                callback(null, "success");
+              }
+            });
+          } else {
+            callback("wrongpassword", null);
+          }
+        });
+      } else {
+        callback("invalid user", null);
+      }
+    }
+  });
+};
+
+const changeWithdrawlPassword = async (datas, callback) => {
+  const salt = await bcrypt.genSalt(10);
+  datas.newPassword = await bcrypt.hash(datas.newPassword, salt);
+  let sql = "select * from users where id = ?";
+  var args = [datas.id];
+  con.query(sql, args, function (err, result) {
+    if (err) {
+      res.json({ err: err });
+    } else {
+      if (result.length > 0) {
+        let user = JSON.parse(JSON.stringify(result[0]));
+        bcrypt.compare(
+          datas.oldPassword,
+          user.withdrawl_password,
+          (err, comRes) => {
+            if (comRes) {
+              let sql = "update users set withdrawl_password=? where id=?";
+              let args = [datas.newPassword, datas.id];
+              con.query(sql, args, function (err, result) {
+                if (err) {
+                  callback("update loginpass error", null);
+                } else {
+                  callback(null, "success");
+                }
+              });
+            } else {
+              callback("wrongpassword", null);
+            }
+          }
+        );
       } else {
         callback("invalid user", null);
       }
@@ -117,21 +195,9 @@ const dateFormat = (date, fstr, utc) => {
   });
 };
 
-const getInvoices = (datas, callback) => {
-  let sql = "select * from invoices";
-  let args = [];
-  con.query(sql, args, function (err, res) {
-    if (err) {
-      callback(err, null);
-    } else {
-      let result = JSON.parse(JSON.stringify(res));
-      callback(null, result);
-    }
-  });
-};
-
 exports.register = register;
 exports.login = login;
 exports.uploadFile = uploadFile;
 exports.dateFormat = dateFormat;
-exports.getInvoices = getInvoices;
+exports.changeLoginPassword = changeLoginPassword;
+exports.changeWithdrawlPassword = changeWithdrawlPassword;
