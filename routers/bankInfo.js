@@ -4,7 +4,6 @@ const bankInfoController = require("../controller/bankInfo");
 
 router.post("/create", async (req, res) => {
   let datas = req.body;
-  console.log(datas);
   bankInfoController.saveData(datas, function (err, result) {
     if (err) {
       res.send(err);
@@ -28,6 +27,17 @@ router.get("/datas", async (req, res) => {
 router.delete("/delete/:id", async (req, res) => {
   let datas = req.params;
   bankInfoController.deleteDatas(datas, function (err, result) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+router.post("/save", async (req, res) => {
+  let datas = req.body;
+  bankInfoController.saveTransactions(datas, function (err, result) {
     if (err) {
       res.send(err);
     } else {
