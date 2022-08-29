@@ -1,5 +1,6 @@
 const con = require("../db/conn");
 const transactionHistory = require("../transaction.json");
+const axios = require("axios");
 
 const saveData = (data, callback) => {
   let sql = "insert bank_info(device_name, message) values(?, ?)";
@@ -15,16 +16,34 @@ const saveData = (data, callback) => {
 };
 
 const geDatas = (data, callback) => {
-  let sql = "select * from bank_info";
-  let args = [];
-  con.query(sql, args, function (err, result) {
-    if (err) {
-      console.log("create bankInfo error" + err);
-      callback(err, null);
-    } else {
-      callback(null, result);
-    }
-  });
+  // let sql = "select * from bank_info";
+  // let args = [];
+  // con.query(sql, args, function (err, result) {
+  //   if (err) {
+  //     console.log("create bankInfo error" + err);
+  //     callback(err, null);
+  //   } else {
+  //     callback(null, result);
+  //   }
+  // });
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization:
+      "Apikey AK_CS.4adff760276711edab64f1c512bb3edd.2z9Sc1zNNeCOvRVGpUXAEcsRPBegdl51cSnTRHN5Ir4TjFxmJuSZWYAhWNfLAObUT0kSMEm5",
+  };
+  axios
+    .get(
+      "https://oauth.casso.vn/v2/transactions?fromDate=2020-04-01&page=0&pageSize=2000000&sort=DESC",
+      {
+        headers: headers,
+      }
+    )
+    .then((response) => {
+      callback(null, response.data.data.records);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 const deleteDatas = async (data, callback) => {
