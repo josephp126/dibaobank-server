@@ -39,7 +39,11 @@ const geDatas = (data, callback) => {
       }
     )
     .then((response) => {
-      callback(null, response.data.data.records);
+      const transactionData = response.data.data.records;
+      const sortData = transactionData.sort(function (a, b) {
+        return a.tid - b.tid;
+      });
+      callback(null, sortData);
     })
     .catch((error) => {
       console.log(error);
