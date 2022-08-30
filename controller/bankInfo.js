@@ -41,7 +41,7 @@ const geDatas = (data, callback) => {
     .then((response) => {
       const transactionData = response.data.data.records;
       const sortData = transactionData.sort(function (a, b) {
-        return a.tid - b.tid;
+        return b.tid - a.tid;
       });
       callback(null, sortData);
     })
