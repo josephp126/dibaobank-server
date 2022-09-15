@@ -1,8 +1,8 @@
 const con = require("../db/conn");
 
 const getDatas = async (data, callback) => {
-  let sql = "select * from account_info where userId=?";
-  let args = [Number(data.userId)];
+  let sql = "select * from account_info";
+  let args = [];
   con.query(sql, args, function (err, result) {
     if (err) {
       console.log("get accountInfo error" + err);

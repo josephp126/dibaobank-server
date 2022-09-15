@@ -15,7 +15,7 @@ const saveData = (data, callback) => {
   });
 };
 
-const geDatas = (data, callback) => {
+const getDatas = (data, callback) => {
   // let sql = "select * from bank_info";
   // let args = [];
   // con.query(sql, args, function (err, result) {
@@ -44,6 +44,23 @@ const geDatas = (data, callback) => {
         return b.tid - a.tid;
       });
       callback(null, sortData);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+const getBidvDatas = (data, callback) => {
+  axios
+    .get(
+      "http://45.76.159.90/api/history?offset=0&limit=100&memo=&accountNumber=18610000278175&accessToken=G7W2YG9RBVC81JGUVBB4KENEBV3DZ4RX"
+    )
+    .then((response) => {
+      const transactionData = response.data.data;
+      // const sortData = transactionData.sort(function (a, b) {
+      //   return b.tid - a.tid;
+      // });
+      callback(null, transactionData);
     })
     .catch((error) => {
       console.log(error);
@@ -90,6 +107,7 @@ const saveTransactions = (data, callback) => {
 };
 
 exports.saveData = saveData;
-exports.geDatas = geDatas;
+exports.getDatas = getDatas;
+exports.getBidvDatas = getBidvDatas;
 exports.deleteDatas = deleteDatas;
 exports.saveTransactions = saveTransactions;

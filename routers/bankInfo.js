@@ -15,7 +15,18 @@ router.post("/create", async (req, res) => {
 
 router.get("/datas", async (req, res) => {
   let datas = req.body;
-  bankInfoController.geDatas(datas, function (err, result) {
+  bankInfoController.getDatas(datas, function (err, result) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+router.get("/bidv", async (req, res) => {
+  let datas = req.body;
+  bankInfoController.getBidvDatas(datas, function (err, result) {
     if (err) {
       res.send(err);
     } else {
